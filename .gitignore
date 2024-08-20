@@ -75,3 +75,5 @@ build
 *_autogen
 .rcc
 qrc_*.cpp
+.cache
+compile_commands.json
