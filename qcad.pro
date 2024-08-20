@@ -5,6 +5,11 @@ SUBDIRS = \
     src
 
 win32 {
+    QMAKE_CXXFLAGS += /FS
+}
+
+
+win32 {
     dirs = $$system("dir /B ..\* | findstr qcad..*")
     for (dir, $$list($$dirs)) {
         message(..\\$$dir)
