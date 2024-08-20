@@ -623,54 +623,55 @@ size_t ON_SerialNumberMap::ActiveIdCount() const
 
 struct ON_SerialNumberMap::SN_ELEMENT* ON_SerialNumberMap::FirstElement() const
 {
-  SN_ELEMENT* e= nullptr;
-  size_t i,j;
+    return nullptr;
+  // SN_ELEMENT* e= nullptr;
+  // size_t i,j;
 
-  // The first element is likely to be m_snblk_list[0]->m_sn[0]
-  // so start looking there.
-  for(i = 0; i < m_snblk_list_count; i++)
-  {
-    if ( m_snblk_list[i]->m_count > m_snblk_list[i]->m_purged )
-    {
-      for ( j = 0; j < m_snblk_list[i]->m_count; j++ )
-      {
-        if ( m_snblk_list[i]->m_sn[j].m_sn_active )
-        {
-          e = &m_snblk_list[i]->m_sn[j];
-          break;
-        }
-      }
-      break;
-    }
-  }
+  // // The first element is likely to be m_snblk_list[0]->m_sn[0]
+  // // so start looking there.
+  // for(i = 0; i < m_snblk_list_count; i++)
+  // {
+  //   if ( m_snblk_list[i]->m_count > m_snblk_list[i]->m_purged )
+  //   {
+  //     for ( j = 0; j < m_snblk_list[i]->m_count; j++ )
+  //     {
+  //       if ( m_snblk_list[i]->m_sn[j].m_sn_active )
+  //       {
+  //         e = &m_snblk_list[i]->m_sn[j];
+  //         break;
+  //       }
+  //     }
+  //     break;
+  //   }
+  // }
 
-  if ( m_sn_block0.m_count > m_sn_block0.m_purged 
-       && (!e || m_sn_block0.m_sn0 < e->m_sn) 
-     )
-  {
-    // It's possible the element is in m_sn_block0.
-    if ( m_sn_block0.m_purged > 0 )
-    {
-      // remove purged elements from m_sn_block0.
-      const_cast<ON_SerialNumberMap*>(this)->InvalidateHashTableHelper();
-      const_cast<ON_SerialNumberMap*>(this)->m_sn_count -= m_sn_block0.m_purged;
-      const_cast<ON_SerialNumberMap*>(this)->m_sn_purged -= m_sn_block0.m_purged;
-      const_cast<ON_SerialNumberMap*>(this)->m_sn_block0.CullBlockHelper();
-    }
-    if ( !m_sn_block0.m_sorted )
-    {
-      // sort elements in m_sn_block0.
-      const_cast<ON_SerialNumberMap*>(this)->InvalidateHashTableHelper();
-      const_cast<ON_SerialNumberMap*>(this)->m_sn_block0.SortBlockHelper();      
-    }
-    if ( !e || m_sn_block0.m_sn0 <  e->m_sn )
-    {
-      // first element in m_sn_block0 is the
-      // one with the smallest serial number.
-      e = const_cast<struct SN_ELEMENT*>(&m_sn_block0.m_sn[0]);
-    }
-  }
-  return e;
+  // if ( m_sn_block0.m_count > m_sn_block0.m_purged
+  //      && (!e || m_sn_block0.m_sn0 < e->m_sn)
+  //    )
+  // {
+  //   // It's possible the element is in m_sn_block0.
+  //   if ( m_sn_block0.m_purged > 0 )
+  //   {
+  //     // remove purged elements from m_sn_block0.
+  //     const_cast<ON_SerialNumberMap*>(this)->InvalidateHashTableHelper();
+  //     const_cast<ON_SerialNumberMap*>(this)->m_sn_count -= m_sn_block0.m_purged;
+  //     const_cast<ON_SerialNumberMap*>(this)->m_sn_purged -= m_sn_block0.m_purged;
+  //     const_cast<ON_SerialNumberMap*>(this)->m_sn_block0.CullBlockHelper();
+  //   }
+  //   if ( !m_sn_block0.m_sorted )
+  //   {
+  //     // sort elements in m_sn_block0.
+  //     const_cast<ON_SerialNumberMap*>(this)->InvalidateHashTableHelper();
+  //     const_cast<ON_SerialNumberMap*>(this)->m_sn_block0.SortBlockHelper();
+  //   }
+  //   if ( !e || m_sn_block0.m_sn0 <  e->m_sn )
+  //   {
+  //     // first element in m_sn_block0 is the
+  //     // one with the smallest serial number.
+  //     e = const_cast<struct SN_ELEMENT*>(&m_sn_block0.m_sn[0]);
+  //   }
+  // }
+  // return e;
 }
 
 struct ON_SerialNumberMap::SN_ELEMENT* ON_SerialNumberMap::LastElement() const

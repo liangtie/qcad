@@ -25,6 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
 
+#include <functional>
 #pragma once
 
 namespace SpatialIndex
