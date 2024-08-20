@@ -623,7 +623,7 @@ size_t ON_SerialNumberMap::ActiveIdCount() const
 
 struct ON_SerialNumberMap::SN_ELEMENT* ON_SerialNumberMap::FirstElement() const
 {
-  struct SN_ELEMENT* e=0;
+  SN_ELEMENT* e= nullptr;
   size_t i,j;
 
   // The first element is likely to be m_snblk_list[0]->m_sn[0]
